@@ -7,6 +7,11 @@ async function createLogs() {
     });
 }
 
+async function insertLog(bookId, action) {
+    return await db.collection("logs").insertOne({ bookId: bookId, action: action });
+}
 module.exports = {
-    createLogs
+    createLogs,
+    insertLog,
+    
 }

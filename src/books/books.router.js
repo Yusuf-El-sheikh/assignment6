@@ -6,5 +6,28 @@ const bookRouter = new Router();
 //endpoint #1
 bookRouter.post("/books", booksController.createBooksCollection);
 
+//endpoint #2
+bookRouter.post("/books/index", booksController.createIndex);
+
+//endpoint #3
+bookRouter.post("/insert-book", booksController.insertBook);
+
+//endpoint #4
+bookRouter.post("/insert-many-books", booksController.insertManyBooks);
+
+//endpoint #5
+bookRouter.patch("/books/:title", booksController.updateBookByTitle);
+
+//endpoint #6
+bookRouter.get("/books/title", booksController.findBookByTitle);
+
+//endpoint #7
+bookRouter.get("/books/year", booksController.findBookByYear);
+
+//endpoint #8
+bookRouter.get("/books/genre", booksController.findBookByGenre);
+
+//endpoint #9 
+bookRouter.get("/books/skip-limit", booksController.getBooksPaginated);
 
 module.exports = bookRouter;

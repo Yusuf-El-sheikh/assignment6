@@ -10,6 +10,18 @@ async function createLogs(req, res, next) {
     }
 }
 
+async function insertLog(req, res, next) {
+    try {
+        const {bookId, action} = req.body;
+        const doc = await logsService.insertLog(bookId, action)
+        res.status(201).json(doc);
+    }
+    catch (error) {
+        next(error);    
+    }
+}
+
 module.exports = {
-    createLogs
+    createLogs,
+    insertLog
 }
