@@ -96,6 +96,18 @@ async function getBooksPaginated() {
     return await booksRepository.getBooksPaginated();
 }
 
+async function findIntegerYears() {
+    return await booksRepository.findIntegerYears();
+}
+
+async function excludeGenres() {
+    return await booksRepository.excludeGenres();
+}
+
+async function deleteByDate() {
+    return await booksRepository.deleteByDate();
+}
+
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -105,5 +117,8 @@ module.exports = {
     findBookByTitle,
     findBookByYear,
     findBookByGenre,
-    getBooksPaginated
+    getBooksPaginated,
+    findIntegerYears,
+    excludeGenres,
+    deleteByDate
 }

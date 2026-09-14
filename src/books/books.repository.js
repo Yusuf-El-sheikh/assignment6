@@ -48,6 +48,18 @@ async function getBooksPaginated() {
     return await db.collection("books").find().skip(2).limit(3).sort({ year: -1 }).toArray();
 }
 
+async function findIntegerYears() {
+    return await db.collection("books").find({ year: { $type: "int" } }).toArray();
+}
+
+async function excludeGenres() {
+    return await db.collection("books").find({ $and: [{ genres: { $neq: "Horror" } }, { genres: { $neq: "Science Fiction" } }] });
+}
+
+async function deleteByDate() {
+    return await db.collection("books").deleteMany({year: {$lt: 2000}});
+}
+
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -57,5 +69,8 @@ module.exports = {
     findBookByTitle,
     findBookByYear,
     findBookByGenre,
-    getBooksPaginated
+    getBooksPaginated,
+    findIntegerYears,
+    excludeGenres,
+    deleteByDate
 }

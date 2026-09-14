@@ -67,4 +67,16 @@ db.books.find({genres: "genre"});
 *Q12*
 
 db.books.find().skip(2).limit(3).sort({year: -1});
+
+*Q13*
+
+db.books.find({year: {$type: "int"}});
+
+*Q14*
+
+db.books.find({$and: [ {genres: {$neq: "Horror"}}, {genres: {$neq: "Science Fiction"}} ]});
+
+*Q15*
+
+
 ```

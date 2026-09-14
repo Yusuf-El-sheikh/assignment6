@@ -100,6 +100,36 @@ async function getBooksPaginated(req, res, next) {
         next(error);    
     }
 }
+
+async function findIntegerYears(req, res, next) {
+    try {
+        const doc = await booksService.findIntegerYears();
+        res.status(200).json(doc);
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+async function excludeGenres(req, res, next) {
+    try {
+        const doc = await booksService.excludeGenres();
+        res.status(200).json(doc);
+    } 
+    catch (error) {
+        next(error);    
+    }
+}
+
+async function deleteByDate(req, res, next) {
+    try {
+        const doc = await booksService.deleteByDate();
+        res.status(200).json(doc);
+    } 
+    catch (error) {
+        next(error);   
+    }
+}
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -109,5 +139,7 @@ module.exports = {
     findBookByTitle,
     findBookByYear,
     findBookByGenre,
-    getBooksPaginated
+    getBooksPaginated,
+    findIntegerYears,
+    excludeGenres
 }

@@ -30,4 +30,10 @@ bookRouter.get("/books/genre", booksController.findBookByGenre);
 //endpoint #9 
 bookRouter.get("/books/skip-limit", booksController.getBooksPaginated);
 
+//endpoint #10
+bookRouter.get("/books/year-integer", booksController.findIntegerYears);
+
+//endpoint #11
+bookRouter.get("/books/exclude-genres", booksController.excludeGenres);
+
 module.exports = bookRouter;
