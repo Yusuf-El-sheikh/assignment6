@@ -53,11 +53,33 @@ async function findIntegerYears() {
 }
 
 async function excludeGenres() {
-    return await db.collection("books").find({ $and: [{ genres: { $neq: "Horror" } }, { genres: { $neq: "Science Fiction" } }] });
+    return await db.collection("books").find({ $and: [{ genres: { $ne: "Horror" } }, { genres: { $ne: "Science Fiction" } }] }).toArray();
 }
 
-async function deleteByDate() {
-    return await db.collection("books").deleteMany({year: {$lt: 2000}});
+async function deleteByDate(date) {
+    return await db.collection("books").deleteMany({ year: { $lt: date } });
+}
+
+async function findByYearSorted() {
+    return await db.collection("books").aggregate([
+        { $match: { year: { $gt: 2000 } } },
+        { $sort: { year: -1 } }
+    ]).toArray();
+}
+
+async function findByYearProjection() {
+    return await db.collection("books").aggregate([
+        { $match: { year: { $gt: 2000 } } },
+        { $sort: { year: -1 } },
+        { $project: { title: 1, author: 1, year: 1, _id: 0 } }
+    ]).toArray();
+}
+
+async function unwindGenres() {
+    return await db.collection("books").aggregate([
+        { $unwind: "$genres" },
+        { $project: { title: 1, genres: 1, _id: 0 } }
+    ]).toArray()
 }
 
 module.exports = {
@@ -72,5 +94,8 @@ module.exports = {
     getBooksPaginated,
     findIntegerYears,
     excludeGenres,
-    deleteByDate
+    deleteByDate,
+    findByYearSorted,
+    findByYearProjection,
+    unwindGenres
 }

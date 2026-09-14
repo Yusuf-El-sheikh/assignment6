@@ -104,8 +104,26 @@ async function excludeGenres() {
     return await booksRepository.excludeGenres();
 }
 
-async function deleteByDate() {
-    return await booksRepository.deleteByDate();
+async function deleteByDate(date) {
+    if (!date) {
+        const error = new Error("Invalid action: missing required data.");
+        error.status = 400;
+        throw error;
+    }
+
+    return await booksRepository.deleteByDate(date);
+}
+
+async function findByYearSorted() {
+    return await booksRepository.findByYearSorted();
+}
+
+async function findByYearProjection() {
+    return await booksRepository.findByYearProjection();
+}
+
+async function unwindGenres() {
+    return await booksRepository.unwindGenres();
 }
 
 module.exports = {
@@ -120,5 +138,8 @@ module.exports = {
     getBooksPaginated,
     findIntegerYears,
     excludeGenres,
-    deleteByDate
+    deleteByDate,
+    findByYearSorted,
+    findByYearProjection,
+    unwindGenres
 }

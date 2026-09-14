@@ -74,9 +74,31 @@ db.books.find({year: {$type: "int"}});
 
 *Q14*
 
-db.books.find({$and: [ {genres: {$neq: "Horror"}}, {genres: {$neq: "Science Fiction"}} ]});
+db.books.find({$and: [ {genres: {$ne: "Horror"}}, {genres: {$ne: "Science Fiction"}} ]});
 
 *Q15*
 
+db.books.deleteMany({year: {$lt: 2000}});
 
+*Q16*
+
+db.books.aggregate([
+    {$match: {year: {$gt: 2000}}},
+    {$sort: {year: -1}}
+]);
+
+*Q17*
+
+db.books.aggregate([
+    {$match: {year: {$gt: 2000}}},
+    {$sort: {year: -1}},
+    {$project: {title: 1, author: 1, year: 1, _id: 0}}
+]);
+
+*Q18*
+
+db.books.aggregate([
+    { $unwind: "$genres"},
+    { $project: {title: 1, genres: 1, _id: 0}}
+]);
 ```

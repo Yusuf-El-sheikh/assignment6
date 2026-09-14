@@ -85,9 +85,9 @@ async function findBookByGenre(req, res, next) {
 
         const doc = await booksService.findBookByGenre(genre);
         res.status(200).json(doc);
-    } 
+    }
     catch (error) {
-        next(error);    
+        next(error);
     }
 }
 
@@ -95,9 +95,9 @@ async function getBooksPaginated(req, res, next) {
     try {
         const doc = await booksService.getBooksPaginated();
         res.status(200).json(doc)
-    } 
+    }
     catch (error) {
-        next(error);    
+        next(error);
     }
 }
 
@@ -115,21 +115,52 @@ async function excludeGenres(req, res, next) {
     try {
         const doc = await booksService.excludeGenres();
         res.status(200).json(doc);
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+async function deleteByDate(req, res, next) {
+    try {
+        const date = parseInt(req.query.year)
+        const doc = await booksService.deleteByDate(date);
+        res.status(200).json(doc);
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+async function findByYearSorted(req, res, next) {
+    try {
+        const doc = await booksService.findByYearSorted();
+        res.status(200).json(doc);
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+async function findByYearProjection(req, res, next) {
+    try {
+        const doc = await booksService.findByYearProjection();
+        res.status(200).json(doc);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function unwindGenres(req, res, next) {
+    try {
+        const doc = await booksService.unwindGenres();
+        res.status(200).json(doc);
     } 
     catch (error) {
         next(error);    
     }
 }
 
-async function deleteByDate(req, res, next) {
-    try {
-        const doc = await booksService.deleteByDate();
-        res.status(200).json(doc);
-    } 
-    catch (error) {
-        next(error);   
-    }
-}
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -141,5 +172,9 @@ module.exports = {
     findBookByGenre,
     getBooksPaginated,
     findIntegerYears,
-    excludeGenres
+    excludeGenres,
+    deleteByDate,
+    findByYearSorted,
+    findByYearProjection,
+    unwindGenres
 }

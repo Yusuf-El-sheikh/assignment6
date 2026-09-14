@@ -36,4 +36,16 @@ bookRouter.get("/books/year-integer", booksController.findIntegerYears);
 //endpoint #11
 bookRouter.get("/books/exclude-genres", booksController.excludeGenres);
 
+//endpoint #12
+bookRouter.delete("/books/before-year", booksController.deleteByDate);
+
+//endpoint #13
+bookRouter.get("/books/aggregate1", booksController.findByYearSorted);
+
+//endpoint #14
+bookRouter.get("/books/aggregate2", booksController.findByYearProjection);
+
+//endpoint #15
+bookRouter.get("/books/aggregate3", booksController.unwindGenres);
+
 module.exports = bookRouter;
