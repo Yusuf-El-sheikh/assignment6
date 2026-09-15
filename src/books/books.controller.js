@@ -161,6 +161,16 @@ async function unwindGenres(req, res, next) {
     }
 }
 
+async function bookLogs(req, res, next) {
+    try {
+        const doc = await booksService.bookLogs();
+        res.status(200).json(doc);
+    } 
+    catch (error) {
+        next(error);    
+    }
+}
+
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -176,5 +186,6 @@ module.exports = {
     deleteByDate,
     findByYearSorted,
     findByYearProjection,
-    unwindGenres
+    unwindGenres,
+    bookLogs
 }

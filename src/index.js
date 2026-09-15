@@ -1,6 +1,7 @@
-const bookRouter = require("./books/books.router")
-const authorsRouter = require("./authors/authors.router")
-const logsRouter = require("./logs/logs.router")
+const bookRouter = require("./books/books.router");
+const authorsRouter = require("./authors/authors.router");
+const logsRouter = require("./logs/logs.router");
+const globalErrorHandler = require("./common/error/error");
 const express = require("express");
 
 const app = express();
@@ -9,6 +10,8 @@ app.use(express.json());
 app.use("/collection", bookRouter);
 app.use("/collection", authorsRouter);
 app.use("/collection", logsRouter);
+
+app.use(globalErrorHandler);
 
 app.listen(3000, ()=>
 {

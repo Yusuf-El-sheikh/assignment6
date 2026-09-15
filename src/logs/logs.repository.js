@@ -1,4 +1,5 @@
 const db = require("../common/db/mongodb");
+const { ObjectId } = require("mongodb");
 
 async function createLogs() {
     return await db.createCollection("logs", {
@@ -8,7 +9,7 @@ async function createLogs() {
 }
 
 async function insertLog(bookId, action) {
-    return await db.collection("logs").insertOne({ bookId: bookId, action: action });
+    return await db.collection("logs").insertOne({ bookId: new ObjectId(bookId), action: action });
 }
 module.exports = {
     createLogs,

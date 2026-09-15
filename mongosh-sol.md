@@ -101,4 +101,15 @@ db.books.aggregate([
     { $unwind: "$genres"},
     { $project: {title: 1, genres: 1, _id: 0}}
 ]);
+
+*Q19*
+
+db.logs.aggregate([
+    {$lookup: {
+        from: "books",
+        localField: "bookId",
+        foreignField: "_id",
+        as: "book_details"
+    }}
+]);
 ```

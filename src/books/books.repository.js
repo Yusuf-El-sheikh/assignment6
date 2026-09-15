@@ -82,6 +82,18 @@ async function unwindGenres() {
     ]).toArray()
 }
 
+async function bookLogs() {
+    return await db.collection("logs").aggregate([
+        {
+            $lookup: {
+                from: "books",
+                localField: "bookId",
+                foreignField: "_id",
+                as: "book_details"
+            }
+        }
+    ]).toArray();
+}
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -97,5 +109,6 @@ module.exports = {
     deleteByDate,
     findByYearSorted,
     findByYearProjection,
-    unwindGenres
+    unwindGenres,
+    bookLogs
 }

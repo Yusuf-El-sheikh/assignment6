@@ -126,6 +126,10 @@ async function unwindGenres() {
     return await booksRepository.unwindGenres();
 }
 
+async function bookLogs() {
+    return await booksRepository.bookLogs();
+}
+
 module.exports = {
     createBooksCollection,
     createIndex,
@@ -141,5 +145,6 @@ module.exports = {
     deleteByDate,
     findByYearSorted,
     findByYearProjection,
-    unwindGenres
+    unwindGenres,
+    bookLogs
 }

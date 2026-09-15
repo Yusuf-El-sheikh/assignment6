@@ -48,4 +48,7 @@ bookRouter.get("/books/aggregate2", booksController.findByYearProjection);
 //endpoint #15
 bookRouter.get("/books/aggregate3", booksController.unwindGenres);
 
+//endpoint #16
+bookRouter.get("/books/aggregate4", booksController.bookLogs);
+
 module.exports = bookRouter;
